@@ -1,0 +1,129 @@
+﻿<Window x:Class="System_Information.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:System_Information"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="504" Width="870">
+
+    <TabControl>
+        <TabItem Header="System info" HorizontalAlignment="Center" Height="20" VerticalAlignment="Center" Width="100">
+            <Grid Background="#FFE5E5E5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="5*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="25*"/>
+                    <ColumnDefinition Width="100*"/>
+                </Grid.ColumnDefinitions>
+                <TextBox x:Name="txtShortDeviceName" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" Width="357" Height="25" TextAlignment="Left" Grid.Column="1" Margin="36,0,0,0" IsReadOnly="True"/>
+                <TextBox x:Name="txtDeviceComment" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" Width="357" Height="25" TextAlignment="Left" Grid.Column="1" Margin="36,0,0,0" IsReadOnly="True" Grid.Row="1"/>
+                <TextBox x:Name="txtOSversion" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" Width="357" Height="25" TextAlignment="Left" Grid.Column="1" Margin="36,0,0,0" IsReadOnly="True" Grid.Row="2"/>
+                <TextBox x:Name="txtOSplatform" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" Width="357" Height="25" TextAlignment="Left" Grid.Column="1" Margin="36,0,0,0" IsReadOnly="True" Grid.Row="3"/>
+                <TextBox x:Name="txtOSlanguage" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" Width="357" Height="25" TextAlignment="Left" Grid.Column="1" Margin="36,0,0,0" IsReadOnly="True" Grid.Row="4"/>
+                <TextBox x:Name="txtOSlanguageUI" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" Width="357" Height="25" TextAlignment="Left" Grid.Column="1" Margin="36,0,0,0" IsReadOnly="True" Grid.Row="5"/>
+                <TextBox x:Name="txtSecureBoot" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" Width="357" Height="25" TextAlignment="Left" Grid.Column="1" Margin="36,0,0,0" IsReadOnly="True" Grid.Row="6"/>
+                <TextBox x:Name="txtBitlocker" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" Width="357" Height="25" TextAlignment="Left" Grid.Column="1" Margin="36,0,0,0" IsReadOnly="True" Grid.Row="7"/>
+                <TextBox x:Name="txtInstallationDate" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" Width="357" Height="25" TextAlignment="Left" Grid.Column="1" Margin="36,0,0,0" IsReadOnly="True" Grid.Row="8"/>
+                <TextBox x:Name="txtUptime" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" Width="357" Height="25" TextAlignment="Left" Grid.Column="1" Margin="36,0,0,0" IsReadOnly="True" Grid.Row="9"/>
+                <TextBox x:Name="tab1" HorizontalAlignment="Center" Text="Short device name" TextWrapping="Wrap" VerticalAlignment="Center" Width="125" Height="25" TextAlignment="Left" IsReadOnly="True"/>
+                <TextBox x:Name="tab1_Copy" HorizontalAlignment="Center" Text="Device comment" TextWrapping="Wrap" VerticalAlignment="Center" Width="125" Height="25" TextAlignment="Left" IsReadOnly="True" Grid.Row="1"/>
+                <TextBox x:Name="tab1_Copy1" HorizontalAlignment="Center" Text="OS version" TextWrapping="Wrap" VerticalAlignment="Center" Width="125" Height="25" TextAlignment="Left" IsReadOnly="True" Grid.Row="2"/>
+                <TextBox x:Name="tab1_Copy2" HorizontalAlignment="Center" Text="OS platform" TextWrapping="Wrap" VerticalAlignment="Center" Width="125" Height="25" TextAlignment="Left" IsReadOnly="True" Grid.Row="3"/>
+                <TextBox x:Name="tab1_Copy3" HorizontalAlignment="Center" Text="OS language" TextWrapping="Wrap" VerticalAlignment="Center" Width="125" Height="25" TextAlignment="Left" IsReadOnly="True" Grid.Row="4"/>
+                <TextBox x:Name="tab1_Copy4" HorizontalAlignment="Center" Text="OS UI language" TextWrapping="Wrap" VerticalAlignment="Center" Width="125" Height="25" TextAlignment="Left" IsReadOnly="True" Grid.Row="5"/>
+                <TextBox x:Name="tab1_Copy5" HorizontalAlignment="Center" Text="OS secure boot" TextWrapping="Wrap" VerticalAlignment="Center" Width="125" Height="25" TextAlignment="Left" IsReadOnly="True" Grid.Row="6"/>
+                <TextBox x:Name="tab1_Copy6" HorizontalAlignment="Center" Text="OS bitlocker" TextWrapping="Wrap" VerticalAlignment="Center" Width="125" Height="25" TextAlignment="Left" IsReadOnly="True" Grid.Row="7"/>
+                <TextBox x:Name="tab1_Copy7" HorizontalAlignment="Center" Text="Installation date" TextWrapping="Wrap" VerticalAlignment="Center" Width="125" Height="25" TextAlignment="Left" IsReadOnly="True" Grid.Row="8"/>
+                <TextBox x:Name="tab1_Copy8" HorizontalAlignment="Center" Text="Uptime / Last Boot" TextWrapping="Wrap" VerticalAlignment="Center" Width="125" Height="25" TextAlignment="Left" IsReadOnly="True" Grid.Row="9"/>
+            </Grid>
+        </TabItem>
+        <TabItem Header="HW info" HorizontalAlignment="Center" Height="20" VerticalAlignment="Center" Width="100">
+            <Grid Background="#FFE5E5E5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="10*"/>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="5*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="25*"/>
+                    <ColumnDefinition Width="100*"/>
+                </Grid.ColumnDefinitions>
+                <TextBox x:Name="txtDeviceVendor" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" Width="357" Height="25" TextAlignment="Left" Grid.Column="2" Margin="36,0,0,0" IsReadOnly="True"/>
+                <TextBox x:Name="txtDeviceModel" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" Width="357" Height="25" TextAlignment="Left" Grid.Column="2" Margin="36,0,0,0" IsReadOnly="True" Grid.Row="1"/>
+                <TextBox x:Name="txtSerialNumber" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" Width="357" Height="25" TextAlignment="Left" Grid.Column="2" Margin="36,0,0,0" IsReadOnly="True" Grid.Row="2"/>
+                <TextBox x:Name="txtUUID" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" Width="357" Height="25" TextAlignment="Left" Grid.Column="2" Margin="36,0,0,0" IsReadOnly="True" Grid.Row="3"/>
+                <TextBox x:Name="txtOperatingMemory" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" Width="357" Height="25" TextAlignment="Left" Grid.Column="2" Margin="36,0,0,0" IsReadOnly="True" Grid.Row="4"/>
+                <TextBox x:Name="txtDiskSpace" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" Width="357" Height="72" TextAlignment="Left" Grid.Column="2" Margin="36,0,0,0" IsReadOnly="True" Grid.Row="5"/>
+                <TextBox x:Name="tab2" HorizontalAlignment="Left" Text="Device vendor" TextWrapping="Wrap" VerticalAlignment="Center" Width="125" Height="25" TextAlignment="Left" IsReadOnly="True" Grid.ColumnSpan="2" Margin="24,0,0,0"/>
+                <TextBox x:Name="tab2_Copy" HorizontalAlignment="Left" Text="Device model" TextWrapping="Wrap" VerticalAlignment="Center" Width="125" Height="25" TextAlignment="Left" IsReadOnly="True" Grid.Row="1" Grid.ColumnSpan="2" Margin="24,0,0,0"/>
+                <TextBox x:Name="tab2_Copy1" HorizontalAlignment="Left" Text="Serial number" TextWrapping="Wrap" VerticalAlignment="Center" Width="125" Height="25" TextAlignment="Left" IsReadOnly="True" Grid.Row="2" Grid.ColumnSpan="2" Margin="24,0,0,0"/>
+                <TextBox x:Name="tab2_Copy2" HorizontalAlignment="Left" Text="UUID" TextWrapping="Wrap" VerticalAlignment="Center" Width="125" Height="25" TextAlignment="Left" IsReadOnly="True" Grid.Row="3" Grid.ColumnSpan="2" Margin="24,0,0,0"/>
+                <TextBox x:Name="tab2_Copy3" HorizontalAlignment="Left" Text="Operating memory" TextWrapping="Wrap" VerticalAlignment="Center" Width="125" Height="25" TextAlignment="Left" IsReadOnly="True" Grid.Row="4" Grid.ColumnSpan="2" Margin="24,0,0,0"/>
+                <TextBox x:Name="tab2_Copy4" HorizontalAlignment="Left" Text="Disk space" TextWrapping="Wrap" VerticalAlignment="Center" Width="125" Height="25" TextAlignment="Left" IsReadOnly="True" Grid.Row="5" Grid.ColumnSpan="2" Margin="24,0,0,0"/>
+            </Grid>
+        </TabItem>
+        <TabItem Header="Network info" HorizontalAlignment="Center" Height="20" VerticalAlignment="Center" Width="100">
+            <Grid Background="#FFE5E5E5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="5*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="25*"/>
+                </Grid.ColumnDefinitions>
+                <TextBox x:Name="txtNetwork"  HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="429" Width="826" Background="White" IsReadOnly="True"/>
+            </Grid>
+        </TabItem>
+        <TabItem Header="User info" HorizontalAlignment="Center" Height="20" VerticalAlignment="Center" Width="100">
+            <Grid Background="#FFE5E5E5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="5*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="25*"/>
+                    <ColumnDefinition Width="100*"/>
+                </Grid.ColumnDefinitions>
+                <TextBox x:Name="txtFullName" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" Width="357" Height="25" TextAlignment="Left" Grid.Column="1" Margin="36,0,0,0" IsReadOnly="True"/>
+                <TextBox x:Name="txtLogonName" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" Width="357" Height="25" TextAlignment="Left" Grid.Column="1" Margin="36,0,0,0" IsReadOnly="True" Grid.Row="1"/>
+                <TextBox x:Name="txtCorpId" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" Width="357" Height="25" TextAlignment="Left" Grid.Column="1" Margin="36,0,0,0" IsReadOnly="True" Grid.Row="2"/>
+                <TextBox x:Name="txtLogonServer" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" Width="357" Height="25" TextAlignment="Left" Grid.Column="1" Margin="36,0,0,0" IsReadOnly="True" Grid.Row="3"/>
+                <TextBox x:Name="txtHomeDirectory" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" Width="357" Height="25" TextAlignment="Left" Grid.Column="1" Margin="36,0,0,0" IsReadOnly="True" Grid.Row="4"/>
+                <TextBox x:Name="txtProfile" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" Width="357" Height="25" TextAlignment="Left" Grid.Column="1" Margin="36,0,0,0" IsReadOnly="True" Grid.Row="5"/>
+                <TextBox x:Name="txtLocalRights" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" Width="357" Height="25" TextAlignment="Left" Grid.Column="1" Margin="36,0,0,0" IsReadOnly="True" Grid.Row="6"/>
+                <TextBox x:Name="tab3" HorizontalAlignment="Center" Text="Full name" TextWrapping="Wrap" VerticalAlignment="Center" Width="125" Height="25" TextAlignment="Left" IsReadOnly="True"/>
+                <TextBox x:Name="tab3_Copy" HorizontalAlignment="Center" Text="Logon name" TextWrapping="Wrap" VerticalAlignment="Center" Width="125" Height="25" TextAlignment="Left" IsReadOnly="True" Grid.Row="1"/>
+                <TextBox x:Name="tab3_Copy1" HorizontalAlignment="Center" Text="Corp ID" TextWrapping="Wrap" VerticalAlignment="Center" Width="125" Height="25" TextAlignment="Left" IsReadOnly="True" Grid.Row="2"/>
+                <TextBox x:Name="tab3_Copy2" HorizontalAlignment="Center" Text="Logon server" TextWrapping="Wrap" VerticalAlignment="Center" Width="125" Height="25" TextAlignment="Left" IsReadOnly="True" Grid.Row="3"/>
+                <TextBox x:Name="tab3_Copy3" HorizontalAlignment="Center" Text="Home directory" TextWrapping="Wrap" VerticalAlignment="Center" Width="125" Height="25" TextAlignment="Left" IsReadOnly="True" Grid.Row="4"/>
+                <TextBox x:Name="tab3_Copy4" HorizontalAlignment="Center" Text="Profile" TextWrapping="Wrap" VerticalAlignment="Center" Width="125" Height="25" TextAlignment="Left" IsReadOnly="True" Grid.Row="5"/>
+                <TextBox x:Name="tab3_Copy5" HorizontalAlignment="Center" Text="Local rights" TextWrapping="Wrap" VerticalAlignment="Center" Width="125" Height="25" TextAlignment="Left" IsReadOnly="True" Grid.Row="6"/>
+            </Grid>
+        </TabItem>
+    </TabControl>
+
+</Window>
