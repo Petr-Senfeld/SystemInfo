@@ -186,23 +186,30 @@ namespace System_Information
 
         private void GetUserInfoTab()
         {
-            Profile = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
-            HomeDir = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
-            CorpId = Environment.UserName;
+            try
+            {
+                Profile = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+                HomeDir = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+                CorpId = Environment.UserName;
+            }
+            catch (Exception e)
+            {
+                LoggerTool.Logger(e.ToString());
+            }
+            
 
             ManagementObjectSearcher userObject = new ManagementObjectSearcher("select * from Win32_Account ");
-
             foreach (var obj in userObject.Get())
             {
                 try
                 {
                     FullName = obj["Name"].ToString();
-                    LocalRights = obj["AccountType"].ToString();
+                    LocalRights = obj["Local"].ToString();
                     LogonName = obj["Name"].ToString();
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
-                    // to be logged
+                    LoggerTool.Logger(e.ToString() + " " + obj.ToString());
                 }
 
             }
