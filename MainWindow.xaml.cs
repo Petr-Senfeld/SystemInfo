@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -102,9 +103,8 @@ namespace System_Information
 
         private void SendEmail_Click(object sender, RoutedEventArgs e)
         {
-            XDocument root = XDocument.Load("settings.xml");
-            var result = root.Element("settings").Descendants("emailAddress").Select(x => x.Attribute("email").Value);
-            EmailAddress = result.FirstOrDefault();
+            XElement root = XElement.Load("settings.xml");
+            EmailAddress = root.Element("Email").Value;
             string subject = "System Info";
             string send = "mailto:" + EmailAddress + "?subject=" + subject + "&body=" + CopyToClip();
 

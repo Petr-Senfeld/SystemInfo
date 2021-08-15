@@ -1,4 +1,4 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-	<settings>
-		<emailAddress value="senfik99@gmail.com"/>
-	</settings>
+<Settings>
+  <Email>senfik99@gmail.com</Email>
+</Settings>

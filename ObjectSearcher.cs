@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.DirectoryServices;
+using System.Globalization;
 using System.IO;
 using System.Management;
 using System.Security.Principal;
@@ -72,6 +74,9 @@ namespace System_Information
                     }
                     else
                         OSlanguage = "Unknown";
+
+                    CultureInfo ci = CultureInfo.InstalledUICulture;
+                    OSlanguageUI = ci.Name;
 
                     // installation date
                     DateTime installDate = ManagementDateTimeConverter.ToDateTime(obj["InstallDate"].ToString());
@@ -170,7 +175,7 @@ namespace System_Information
 
             }
 
-            // Serial number
+            // UUID
             ManagementObjectSearcher UUIDObject = new ManagementObjectSearcher("select * from Win32_ComputerSystemProduct");
             foreach (var obj in UUIDObject.Get())
             {
@@ -228,18 +233,37 @@ namespace System_Information
         {
             try
             {
+                FullName = WindowsIdentity.GetCurrent().Name;
                 Profile = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
                 HomeDir = Environment.GetEnvironmentVariable("HOMEDRIVE") + Environment.GetEnvironmentVariable("HOMEPATH");
                 CorpId = Environment.UserName;
                 LogonName = Environment.UserDomainName + "/" + CorpId;
                 LogonServer = Environment.GetEnvironmentVariable("LOGONSERVER");
+
+                // getting local user rights
+                //var userRights = new WindowsPrincipal(WindowsIdentity.GetCurrent());
+                string sPath = "WinNT://" + Environment.MachineName + ",computer";
+                using (var computerEntry = new DirectoryEntry(sPath))
+                {
+                    foreach (DirectoryEntry childEntry in computerEntry.Children)
+                    {
+                        if (childEntry.SchemaClassName == "User")
+                        {
+                            object obGroups = childEntry.Invoke("Groups");
+                            foreach (object ob in (System.Collections.IEnumerable)obGroups)
+                            {
+                                DirectoryEntry obGpEntry = new DirectoryEntry(ob);
+                                LocalRights += obGpEntry.Name + ", ";
+                                obGpEntry.Close();
+                            }
+                        }
+                    }
+                }
             }
             catch (Exception e)
             {
                 LoggerTool.Logger(e.ToString());
             }
-
-            var user = new WindowsPrincipal(WindowsIdentity.GetCurrent());
         }
     }
 }
