@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
-using System.Text;
 
 namespace System_Information
 {
@@ -10,7 +8,11 @@ namespace System_Information
     {
         public static void Logger(string s)
         {
-            File.AppendAllText(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\log.txt", s + "\n");
+            string path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\log.txt";
+            if (File.Exists(path))
+                File.Delete(path);
+            else
+                File.AppendAllText(path, (DateTime.Now.ToUniversalTime() + " " + s + "\n"));
         }
     }
 }

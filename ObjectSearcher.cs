@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Management;
+using System.Security.Principal;
 using System.Text;
 
 namespace System_Information
@@ -83,10 +84,10 @@ namespace System_Information
                     var freeMemory = Math.Round(double.Parse(obj["FreePhysicalMemory"].ToString()) / 1024 / 1024, 2);
                     OperatingMemory = string.Format("{0} Gb Total ({1} Gb Free)", totalMemory, freeMemory);
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
 
-                    // to be logged
+                    LoggerTool.Logger(e.ToString());
                 }
             }
 
@@ -98,35 +99,43 @@ namespace System_Information
                 {
                     OSplatform = obj["Architecture"].ToString() == "9" ? "x64" : "x86";
                 }
-                catch (Exception)
+                catch (Exception e )
                 {
-                    // to be logged
+                    LoggerTool.Logger(e.ToString());
                 }
             }
 
             // bitlocker
-            ManagementScope scope = new ManagementScope("\\\\.\\ROOT\\CIMV2\\Security\\MicrosoftVolumeEncryption");
-            ObjectQuery query = new ObjectQuery("SELECT * FROM Win32_EncryptableVolume");
-            ManagementObjectSearcher bitlockerObject = new ManagementObjectSearcher(scope, query);
+            //    ManagementScope scope = new ManagementScope("\\\\.\\ROOT\\CIMV2\\Security\\MicrosoftVolumeEncryption");
+            //    ObjectQuery query = new ObjectQuery("SELECT * FROM Win32_EncryptableVolume");
+            //    ManagementObjectSearcher bitlockerObject = new ManagementObjectSearcher(scope, query);
 
-            foreach (var obj in bitlockerObject.Get())
-            {
-                try
-                {
-                    Bitlocker = obj["ProtectionStatus"].ToString() == "1" ? "Active" : "Deactivated";
-                }
-                catch (Exception)
-                {
-                    // to be logged
-                }
+            //    foreach (var obj in bitlockerObject.Get())
+            //    {
+            //        try
+            //        {
+            //            Bitlocker = obj["ProtectionStatus"].ToString() == "1" ? "Active" : "Deactivated";
+            //        }
+            //        catch (Exception)
+            //        {
+            //            // to be logged
+            //        }
 
-            }
+            //    }
             // secure boot
-            int rc = 0;
-            string key = @"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecureBoot\State";
-            string subkey = @"UEFISecureBootEnabled";
-            object value = Registry.GetValue(key, subkey, rc);
-            SecureBoot = value.ToString() == "1" ? "Active" : "Deactivated";
+            try
+            {
+                int rc = 0;
+                string key = @"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecureBoot\State";
+                string subkey = @"UEFISecureBootEnabled";
+                object value = Registry.GetValue(key, subkey, rc);
+                SecureBoot = value.ToString() == "1" ? "Active" : "Deactivated";
+            }
+            catch (Exception e)
+            {
+                LoggerTool.Logger(e.ToString());
+            }
+
         }
 
         private void GetHWinfoTab()
@@ -140,9 +149,9 @@ namespace System_Information
                     DeviceVendor = obj["Manufacturer"].ToString();
                     DeviceModel = obj["Model"].ToString();
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
-                    // to be logged
+                    LoggerTool.Logger(e.ToString());
                 }
             }
 
@@ -154,34 +163,65 @@ namespace System_Information
                 {
                     SerialNumber = obj["SerialNumber"].ToString();
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
-                    // to be logged
+                    LoggerTool.Logger(e.ToString());
+                }
+
+            }
+
+            // Serial number
+            ManagementObjectSearcher UUIDObject = new ManagementObjectSearcher("select * from Win32_ComputerSystemProduct");
+            foreach (var obj in UUIDObject.Get())
+            {
+                try
+                {
+                    UUID = obj["UUID"].ToString();
+                }
+                catch (Exception e)
+                {
+                    LoggerTool.Logger(e.ToString());
                 }
 
             }
 
             // diskspace
-            DriveInfo[] allDrives = DriveInfo.GetDrives();
-            foreach (DriveInfo d in allDrives)
+            try
             {
-                if (d.IsReady == true)
-                    DiskSpace += d.Name + " " + string.Format("[{0}] Total {1} Gb", d.VolumeLabel, (d.TotalSize / 1024 / 1024 / 1024)) + " " + string.Format("({0} Gb Free )\n", (d.TotalFreeSpace / 1024 / 1024 / 1024).ToString());
+                DriveInfo[] allDrives = DriveInfo.GetDrives();
+                foreach (DriveInfo d in allDrives)
+                {
+                    if (d.IsReady == true)
+                        DiskSpace += d.Name + " " + string.Format("[{0}] Total {1} Gb", d.VolumeLabel, (d.TotalSize / 1024 / 1024 / 1024)) + " " + string.Format("({0} Gb Free )\n", (d.TotalFreeSpace / 1024 / 1024 / 1024).ToString());
+                }
             }
+            catch (Exception e)
+            {
+                LoggerTool.Logger(e.ToString());
+            }
+            
         }
 
         private void GetNetworkInfoTab()
         {
             // network info
-            Process p = new Process();
-            p.StartInfo.UseShellExecute = false;
-            p.StartInfo.RedirectStandardOutput = true;
-            p.StartInfo.CreateNoWindow = true;
-            p.StartInfo.FileName = "ipconfig.exe";
-            p.StartInfo.Arguments = "/all";
-            p.Start();
-            p.StartInfo.Arguments = "exit";
-            NetworkInfo = p.StandardOutput.ReadToEnd();
+            try
+            {
+                Process p = new Process();
+                p.StartInfo.UseShellExecute = false;
+                p.StartInfo.RedirectStandardOutput = true;
+                p.StartInfo.CreateNoWindow = true;
+                p.StartInfo.FileName = "ipconfig.exe";
+                p.StartInfo.Arguments = "/all";
+                p.Start();
+                p.StartInfo.Arguments = "exit";
+                NetworkInfo = p.StandardOutput.ReadToEnd();
+            }
+            catch (Exception e)
+            {
+                LoggerTool.Logger(e.ToString());
+            }
+            
         }
 
         private void GetUserInfoTab()
@@ -189,30 +229,17 @@ namespace System_Information
             try
             {
                 Profile = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
-                HomeDir = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+                HomeDir = Environment.GetEnvironmentVariable("HOMEDRIVE") + Environment.GetEnvironmentVariable("HOMEPATH");
                 CorpId = Environment.UserName;
+                LogonName = Environment.UserDomainName + "/" + CorpId;
+                LogonServer = Environment.GetEnvironmentVariable("LOGONSERVER");
             }
             catch (Exception e)
             {
                 LoggerTool.Logger(e.ToString());
             }
-            
 
-            ManagementObjectSearcher userObject = new ManagementObjectSearcher("select * from Win32_Account ");
-            foreach (var obj in userObject.Get())
-            {
-                try
-                {
-                    FullName = obj["Name"].ToString();
-                    LocalRights = obj["Local"].ToString();
-                    LogonName = obj["Name"].ToString();
-                }
-                catch (Exception e)
-                {
-                    LoggerTool.Logger(e.ToString() + " " + obj.ToString());
-                }
-
-            }
+            var user = new WindowsPrincipal(WindowsIdentity.GetCurrent());
         }
     }
 }
