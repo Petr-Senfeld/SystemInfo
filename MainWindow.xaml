@@ -47,6 +47,7 @@
                 <TextBox x:Name="tab1_Copy7" HorizontalAlignment="Center" Text="Installation date" TextWrapping="Wrap" VerticalAlignment="Center" Width="125" Height="25" TextAlignment="Left" IsReadOnly="True" Grid.Row="8"/>
                 <TextBox x:Name="tab1_Copy8" HorizontalAlignment="Center" Text="Uptime / Last Boot" TextWrapping="Wrap" VerticalAlignment="Center" Width="125" Height="25" TextAlignment="Left" IsReadOnly="True" Grid.Row="9"/>
                 <Button x:Name="CopyToClipboard" Content="Copy to clipboard" Grid.Column="1" HorizontalAlignment="Left" Margin="437,0,0,0" Grid.Row="8" VerticalAlignment="Center" Height="25" Width="106" Click="CopyToClipboard_Click"/>
+                <Button x:Name="SendEmail" Content="Send email" Grid.Column="1" HorizontalAlignment="Left" Margin="548,0,0,0" Grid.Row="8" VerticalAlignment="Center" Height="25" Width="106" Click="SendEmail_Click"/>
             </Grid>
         </TabItem>
         <TabItem Header="HW info" HorizontalAlignment="Center" Height="20" VerticalAlignment="Center" Width="100">

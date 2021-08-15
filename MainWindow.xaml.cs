@@ -1,7 +1,8 @@
-﻿using System.IO;
-using System.Reflection;
+﻿using System.Diagnostics;
+using System.Linq;
 using System.Text;
 using System.Windows;
+using System.Xml.Linq;
 
 namespace System_Information
 {
@@ -16,7 +17,9 @@ namespace System_Information
             ObjectSearcher os = new ObjectSearcher();
             SetValuesToTextboxes(os);
         }
-        
+
+        public string EmailAddress { get; private set; }
+
         private void SetValuesToTextboxes(ObjectSearcher os)
         {
             // System info Tab
@@ -96,5 +99,21 @@ namespace System_Information
         {
             Clipboard.SetText(CopyToClip(), TextDataFormat.UnicodeText);
         }
+
+        private void SendEmail_Click(object sender, RoutedEventArgs e)
+        {
+            XDocument root = XDocument.Load("settings.xml");
+            var result = root.Element("settings").Descendants("emailAddress").Select(x => x.Attribute("email").Value);
+            EmailAddress = result.FirstOrDefault();
+            string subject = "System Info";
+            string send = "mailto:" + EmailAddress + "?subject=" + subject + "&body=" + CopyToClip();
+
+            Process myProcess = new Process();
+            myProcess.StartInfo.FileName = send;
+            myProcess.StartInfo.UseShellExecute = true;
+            myProcess.StartInfo.RedirectStandardOutput = false;
+            myProcess.Start();
+        }
+
     }
 }
